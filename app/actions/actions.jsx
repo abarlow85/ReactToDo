@@ -17,18 +17,20 @@ export var addTodo = (todo) => {
 };
 
 export var startAddTodos = () => {
+	console.log('startAddTodos')
 
 	return (dispatch, getState) => {
 
 		var uid = getState().auth.uid;
-		return firebaseRef.child(`users/${uid}/todos'`).once('value').then((snapshot) => {
+		var todosRef = firebaseRef.child(`users/${uid}/todos`);
+		return todosRef.once('value').then((snapshot) => {
 			var todos = snapshot.val() || {}
+			console.log(snapshot.val())
 			var parsedTodos = Object.keys(todos).map((key) => {
 				var id = key
 				var values = snapshot.val()[id]
 				return {id, ...values}
 			});
-
 			dispatch(addTodos(parsedTodos));
 		});
 
@@ -105,6 +107,7 @@ export var startLogin = () => {
 };
 
 export var login = (uid) => {
+	console.log('login');
 	return {
 		type: 'LOGIN',
 		uid
