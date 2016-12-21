@@ -6,8 +6,9 @@ var TestUtils = require('react-addons-test-utils');
 var $ = require('jQuery');
 
 var configureStore = require('configureStore');
-import TodoList from 'TodoList';
 import {TodoApp} from 'TodoApp';
+import TodoList from 'TodoList';
+
 
 describe('TodoApp', () => {
 	it('should exist', () => {
@@ -23,9 +24,9 @@ describe('TodoApp', () => {
 			</Provider>
 		);
 
-		var todoApp = TestUtils.scryRenderedComponentsWithType(provider, TodoApp)[0]
+		var todoApp = TestUtils.scryRenderedComponentsWithType(provider, TodoApp)[0];
 
-		var todoList = TestUtils.scryRenderedComponentsWithType(todoApp, TodoList)
+		var todoList = TestUtils.scryRenderedComponentsWithType(todoApp, TodoList);
 
 		expect(todoList.length).toEqual(1);
 	});

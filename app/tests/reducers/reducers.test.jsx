@@ -112,6 +112,36 @@ describe('Reducers', () => {
 		});
 	});
 
+	describe('authReducer', () => {
+
+		it('should add user id to auth', () => {
+
+			var uid = '12312asdasd';
+
+			var action = {
+				type: 'LOGIN',
+				uid
+			};
+
+			var res = reducers.authReducer(undefined, df(action));
+			expect(res.uid).toEqual(uid);
+
+		});
+
+		it('should remove user id from auth', () => {
+
+			var prevState = {uid:'123123dfsa'};
+
+			var action = {
+				type: 'LOGOUT'
+			};
+
+			var res = reducers.authReducer(df(prevState), df(action));
+			expect(res).toEqual({});
+		})
+
+	});
+
 
 
 });

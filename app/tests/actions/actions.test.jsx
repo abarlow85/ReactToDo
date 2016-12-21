@@ -161,6 +161,31 @@ describe('Actions', () => {
 			}, done);
 		});
 
+	});
+
+	describe('Authentication', () => {
+
+		it('should generate login action object', () => {
+			var action = {
+				type: 'LOGIN',
+				uid: '1234123asdfasdf'
+			};
+
+			var res = actions.login(action.uid)
+
+			expect(res).toEqual(action)
+		});
+
+		it('should generate LOGOUT object', () => {
+			var action = {
+				type: 'LOGOUT'
+			};
+
+			var res = actions.logout()
+
+			expect(res).toEqual(action);
+		});
+
 	});	
 
 
