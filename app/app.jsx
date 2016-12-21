@@ -9,7 +9,6 @@ var TodoAPI = require('TodoAPI');
 var actions = require('actions');
 var store = require('configureStore').configure();
 
-
 store.subscribe(() => {
 	var state = store.getState();
 	TodoAPI.setTodos(state.todos);
