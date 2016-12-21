@@ -11,9 +11,9 @@ export var configure = (initialState = {}) => {
 		auth: authReducer
 	});
 
-	var devTools = process.env.NODE_ENV !== 'test' ? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() : undefined;
+	var devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
-	var store = redux.createStore(reducers,initialState,redux.compose(redux.applyMiddleware(thunk), devTools));
+	var store = process.env.NODE_ENV === 'test' ? redux.createStore(reducers,initialState,redux.compose(redux.applyMiddleware(thunk))) : redux.createStore(reducers,initialState,redux.compose(redux.applyMiddleware(thunk), devTools));
 
 	return store;
 }
