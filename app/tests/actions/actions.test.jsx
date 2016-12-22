@@ -175,10 +175,10 @@ describe('Actions', () => {
 		it('should generate login action object', () => {
 			var action = {
 				type: 'LOGIN',
-				uid: '1234123asdfasdf'
+				user: {uid: '1234123asdfasdf', isAnonymous: true}
 			};
 
-			var res = actions.login(action.uid)
+			var res = actions.login(action.user)
 
 			expect(res).toEqual(action)
 		});

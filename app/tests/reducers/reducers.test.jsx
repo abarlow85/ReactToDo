@@ -141,7 +141,10 @@ describe('Reducers', () => {
 
 			var action = {
 				type: 'LOGIN',
-				uid
+				user: {
+					uid,
+					isAnonymous: true
+				}
 			};
 
 			var res = reducers.authReducer(undefined, df(action));
@@ -151,7 +154,7 @@ describe('Reducers', () => {
 
 		it('should remove user id from auth', () => {
 
-			var prevState = {uid:'123123dfsa'};
+			var prevState = {uid:'123123dfsa', anon: true};
 
 			var action = {
 				type: 'LOGOUT'

@@ -93,26 +93,49 @@ export var startToggleTodo = (id, completed) => {
 	};
 };
 
-export var startLogin = () => {
+export var startLogin = (guest) => {
 	return (dispatch, getState) => {
-		return firebase.auth().signInWithPopup(githubProvider).then((result) => {
-			console.log('Auth worked');
-		}, (e) => {
-			console.log('Unable to auth', e);
-		});
+
+		if (guest) {
+
+			return firebase.auth().signInAnonymously().then((result) => {
+				console.log('Auth worked');
+			}, (e) => {
+				console.log('Unable to auth', e);
+			});
+
+		} else {
+			return firebase.auth().signInWithPopup(githubProvider).then((result) => {
+				console.log('Auth worked');
+			}, (e) => {
+				console.log('Unable to auth', e);
+			});
+
+		}
 	};
 };
 
-export var login = (uid) => {
+export var login = ({uid, isAnonymous}) => {
 	return {
 		type: 'LOGIN',
-		uid
+		user: {
+			uid,
+			isAnonymous
+		}
 	};
 }
 
 export var startLogout = () => {
 	return (dispatch, getState) => {
+
+		var user = getState().auth
+
+		if (user.anon) {
+			firebaseRef.child(`users/${user.uid}/todos`).remove()
+		}
+
 		return firebase.auth().signOut().then(() => {
+
 			dispatch(logout());
 		});
 	};

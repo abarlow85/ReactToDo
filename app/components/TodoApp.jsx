@@ -14,6 +14,15 @@ export var TodoApp = React.createClass({
 		dispatch(actions.startLogout());
 	},
 
+	renderGuest() {
+
+		var {anon} = this.props.auth
+
+		if (anon) {
+			return <p>Note: As an anonymous user, logging out will cause your list to be deleted.</p>
+		}
+	},
+
 	render() {
 		return (
 			<div>
@@ -29,6 +38,7 @@ export var TodoApp = React.createClass({
 							<TodoList />
 							<AddTodoForm />
 						</div>
+						{this.renderGuest()}
 					</div>
 				</div>
 			</div>
@@ -36,4 +46,4 @@ export var TodoApp = React.createClass({
 	}
 });
 
-export default Redux.connect()(TodoApp);
+export default Redux.connect((state) => state)(TodoApp);

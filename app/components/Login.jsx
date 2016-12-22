@@ -10,6 +10,11 @@ export var Login = React.createClass({
 		dispatch(actions.startLogin());
 	},
 
+	onGuestLogin() {
+		var {dispatch} = this.props;
+		dispatch(actions.startLogin('guest'));
+	},
+
 	render() {
 		return (
 			<div>
@@ -21,6 +26,8 @@ export var Login = React.createClass({
 							<h3>Login</h3>
 							<p>Login with GitHub account below.</p>
 							<button className="button" onClick={this.onLogin} >Login With GitHub</button>
+							<p>OR</p>
+							<button className="button" onClick={this.onGuestLogin} >Sign in as Guest</button>
 						</div>
 					</div>
 				</div>

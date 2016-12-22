@@ -55,7 +55,8 @@ export var authReducer = (state = {}, action) => {
 	switch (action.type) {
 		case 'LOGIN':
 			return {
-				uid: action.uid
+				uid: action.user.uid,
+				anon: action.user.isAnonymous
 			};
 		case 'LOGOUT':
 			return {};
